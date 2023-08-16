@@ -25,6 +25,7 @@ public class UniversalTags {
    public static final TagKey<Item> FOODS = createTag("foods", item -> item.isEdible());
    public static final TagKey<Item> FUELS = createTag("furnace_fuels", item -> FurnaceBlockEntity.isFuel(new ItemStack(item)));
    public static final TagKey<Item> BLOCKS = createTag("blocks", item -> item instanceof BlockItem);
+   public static final TagKey<Item> DAMAGEABLE = createTag("damageable", item -> item.canBeDepleted());
 
    public static TagKey<Item> createTag(String name, Predicate<Item> condition) {
       TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", name));
