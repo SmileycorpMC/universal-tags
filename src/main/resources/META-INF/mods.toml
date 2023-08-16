@@ -1,0 +1,11 @@
+modLoader="javafml" #mandatory
+loaderVersion="[37,)"
+license="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"
+
+[[mods]]
+modId="utags"
+version="0.1.0"
+displayName="Universal Tags"
+credits="Smileycorp" #optional
+authors="Smileycorp" #optional
+description=""
