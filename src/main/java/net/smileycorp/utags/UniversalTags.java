@@ -8,23 +8,14 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Mod(Constants.MODID)
-@Mod.EventBusSubscriber(modid = Constants.MODID)
 public class UniversalTags {
 
    private static Logger logger = Logger.getLogger(Constants.NAME);
@@ -39,21 +30,6 @@ public class UniversalTags {
       TagKey<Item> tag = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", name));
       TAGS.add(new TagReference(tag, condition));
       return tag;
-   }
-
-   //@SubscribeEvent(priority = EventPriority.HIGHEST)
-   public static void updateTags(TagsUpdatedEvent event) {
-      if (event.getUpdateCause() != TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD) return;
-      ForgeRegistries.ITEMS.forEach(item -> {
-         UniversalTags.TAGS.forEach(ref-> {
-            if (ref.matches(item)) {
-               UniversalTags.logInfo("adding " + item + " to tag " + ref.getTag().location());
-               Set<TagKey<Item>> tags = item.builtInRegistryHolder().getTagKeys().collect(Collectors.toSet());
-               tags.add(ref.getTag());
-               item.builtInRegistryHolder().bindTags(tags);
-            }
-         });
-      });
    }
 
    public static void logInfo(Object message) {

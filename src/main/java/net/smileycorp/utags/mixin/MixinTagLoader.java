@@ -2,11 +2,8 @@ package net.smileycorp.utags.mixin;
 
 import com.google.common.collect.Lists;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.tags.TagLoader;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.smileycorp.utags.TagReference;
 import net.smileycorp.utags.UniversalTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mixin(TagLoader.class)
 public class MixinTagLoader {
