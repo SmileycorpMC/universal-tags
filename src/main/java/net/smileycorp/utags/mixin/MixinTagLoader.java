@@ -3,7 +3,9 @@ package net.smileycorp.utags.mixin;
 import com.google.common.collect.Lists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.smileycorp.utags.AddTagsEvent;
 import net.smileycorp.utags.UniversalTags;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,8 +27,10 @@ public class MixinTagLoader {
     private <T> void build(Map<ResourceLocation, List<TagLoader.EntryWithSource>> p_203899_, CallbackInfoReturnable<Map<ResourceLocation, Collection<T>>> callback) {
         if (!directory.equals("tags/items")) return;
         Map<ResourceLocation, Collection<T>> map = callback.getReturnValue();
+        AddTagsEvent event = new AddTagsEvent();
+        MinecraftForge.EVENT_BUS.post(event);
         ForgeRegistries.ITEMS.forEach(item -> {
-            UniversalTags.TAGS.forEach(ref-> {
+            event.getTags().forEach(ref-> {
                 if (ref.matches(item)) {
                     Collection<T> collection = map.get(ref.location());
                     collection = collection == null ? Lists.newArrayList() : Lists.newArrayList(collection);
