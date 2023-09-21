@@ -1,32 +1,17 @@
 package net.smileycorp.utags;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
-import java.util.function.Predicate;
+public interface TagReference {
 
-public class TagReference {
+    boolean matches(Item item);
 
-    private final TagKey<Item> tag;
-    private final Predicate<Item> condition;
+    TagKey<Item> getTag();
 
-    public TagReference(TagKey<Item> tag, Predicate<Item> condition) {
-        this.tag = tag;
-        this.condition = condition;
-    }
+    ResourceLocation location();
 
-    public boolean matches(Item item) {
-        return condition.test(item);
-    }
-
-    public TagKey<Item> getTag() {
-        return tag;
-    }
-
-    public ResourceLocation location() {
-        return tag.location();
-    }
+    boolean isEnabled();
 
 }

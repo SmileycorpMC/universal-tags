@@ -4,8 +4,8 @@ license="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"
 
 [[mods]]
 modId="utags"
-version="0.1.3"
-displayName="Universal Tags"
+version="1.0.0"
+displayName="Universal Item Tags"
 credits="Smileycorp" #optional
 authors="Smileycorp" #optional
 description=""
